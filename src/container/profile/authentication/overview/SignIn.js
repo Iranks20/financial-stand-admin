@@ -50,7 +50,7 @@
 //       <Col xxl={6} xl={8} md={12} sm={18} xs={24}>
 //         <AuthFormWrap>
 //           <div className="ninjadash-authentication-top">
-//             <h2 className="ninjadash-authentication-top__title">Sign in Muda Admin</h2>
+//             <h2 className="ninjadash-authentication-top__title">Sign in To Financial Stand Savings Group</h2>
 //           </div>
 //           <div className="ninjadash-authentication-content">
 //             <Form name="login" form={form} onFinish={handleSubmit} layout="vertical">
@@ -138,7 +138,7 @@ function SignIn() {
       <Col xxl={6} xl={8} md={12} sm={18} xs={24}>
         <AuthFormWrap>
           <div className="ninjadash-authentication-top">
-            <h2 className="ninjadash-authentication-top__title">Sign in Muda Admin</h2>
+            <h2 className="ninjadash-authentication-top__title">Sign in To Financial Stand Savings Group</h2>
           </div>
           <div className="ninjadash-authentication-content">
             <Form name="login" form={form} onFinish={handleSubmit} layout="vertical">

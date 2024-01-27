@@ -1,17 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from 'antd';
 import { UserTableStyleWrapper } from '../style';
 import { Cards } from '../../../components/cards/frame/cards-frame';
-import { DollarCircleOutlined, BankOutlined, ShoppingOutlined } from '@ant-design/icons';
+import { adminUrl } from '../../../apiUrls/apiUrls';
+import { DollarCircleOutlined, BankOutlined, ShoppingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 function UserListTable() {
-  // Dummy data for the cards
-  const cardData = [
-    { title: "Total Savings", amount: "$20,000", icon: <DollarCircleOutlined /> },
-    { title: "Total Loan", amount: "$15,000", icon: <BankOutlined /> },
-    { title: "Total Expenses", amount: "$5,000", icon: <ShoppingOutlined /> },
-    { title: "Total Profits", amount: "$10,000", icon: <ShoppingOutlined /> },
-  ];
+  const [cardData, setCardData] = useState([]);
+
+  useEffect(() => {
+    fetch(`${adminUrl}/loans/add_loan`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 100) {
+          // Transform the data to match your card data structure
+          const transformedData = data.data.map(item => {
+            let icon;
+            switch (item.name) {
+              case "Total Savings":
+                icon = <DollarCircleOutlined />;
+                break;
+              case "Total Loans":
+                icon = <BankOutlined />;
+                break;
+              case "Total Fines":
+                icon = <ExclamationCircleOutlined />;
+                break;
+              default:
+                icon = null;
+            }
+            return {
+              title: item.name,
+              amount: `$${item.total_amount || item.total_loans}`,
+              icon: icon,
+            };
+          });
+          setCardData(transformedData);
+        } else {
+          throw new Error('Failed to fetch data');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
     <Cards headless>
@@ -27,9 +59,9 @@ function UserListTable() {
                 maxWidth: '400px', 
                 flexGrow: 1, 
                 margin: '10px', 
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)', // Increased shadow
-                border: '2px solid #f0f0f0', // Bold border
-                backgroundColor: '#fafafa' // Slightly different background color for contrast
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)', 
+                border: '2px solid #f0f0f0', 
+                backgroundColor: '#fafafa'
               }}
               bodyStyle={{ fontSize: '20px' }}
             >

@@ -215,7 +215,7 @@ const ThemeLayout = (WrappedComponent) => {
                     <Row>
                       <Col md={12} xs={24}>
                         <span className="admin-footer__copyright">
-                          ©<Link to="#">Muda Tech</Link>
+                          ©<Link to="#">Financial Stand</Link>
                         </span>
                       </Col>
                       {/* <Col md={12} xs={24}>
