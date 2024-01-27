@@ -1,7 +1,7 @@
 # .github/workflows/build_and_test.yml
 on:
   push:
-    branches: [ dev2 ]
+    branches: [ master ]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
