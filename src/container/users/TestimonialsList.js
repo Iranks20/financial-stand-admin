@@ -1,5 +1,4 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
 import UilEye from '@iconscout/react-unicons/icons/uil-eye';
@@ -19,22 +18,27 @@ function UserList() {
       users: state.users,
     };
   });
-  const navigate = useNavigate();
-  const handleAddNewTestimonial = () => {
-    navigate('/admin/ecommerce/add-testimonial');
-  };
+
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const memberDetails = JSON.parse(localStorage.getItem('member_details'));
+    if (memberDetails) {
+      setUserName(memberDetails.first_name || '');
+    }
+  }, []);
 
   const usersTableData = [];
 
-  users.map((user) => {
+  users.forEach((user) => {
     const { id, full_name, designation, img, status } = user;
 
-    return usersTableData.push({
+    usersTableData.push({
       key: id,
       user: (
         <div className="user-info">
           <figure>
-            <img style={{ width: '40px' }} src={require(`../../${img}`)} alt="" />
+            <img style={{ width: '40px' }} src={require(`../../${img}`).default} alt="" />
           </figure>
           <figcaption>
             <Heading className="user-name" as="h6">
@@ -67,16 +71,11 @@ function UserList() {
 
   return (
     <>
-      <CardToolbox>
+      <CardToolbox style={{ display: 'flex', justifyContent: 'center' }}>
         <PageHeader
           className="ninjadash-page-header-main"
           ghost
-          title="Users"
-          // buttons={[
-          //   <Button className="btn-add_new" size="default" type="primary" key="1" onClick={handleAddNewTestimonial} style={{ backgroundColor: "#47abff" }}>
-          //     + Add User
-          //   </Button>,
-          // ]}
+          title={`Welcome to Your Financial Stand Dashboard, ${userName}`}
         />
       </CardToolbox>
 

@@ -98,11 +98,22 @@ function MenuItems({ toggleCollapsed }) {
     ),
     getItem(
       <NavLink onClick={toggleCollapsed} to={`${path}/users/testimoniallist`}>
-        {('Users')}
+        {('Dashboard')}
       </NavLink>,
       'users',
       !topMenu && (
         <NavLink className="menuItem-iocn" to={`${path}/users/testimoniallist`}>
+          <UilBookOpen />
+        </NavLink>
+      ),
+    ),
+    getItem(
+      <NavLink onClick={toggleCollapsed} to={`${path}/users/commentlist`}>
+        {('Users')}
+      </NavLink>,
+      'members',
+      !topMenu && (
+        <NavLink className="menuItem-iocn" to={`${path}/users/commentlist`}>
           <UilBookOpen />
         </NavLink>
       ),
@@ -177,17 +188,17 @@ function MenuItems({ toggleCollapsed }) {
         </NavLink>
       ),
     ),
-    getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}/users/testimoniallist`}>
-        {('Expenses')}
-      </NavLink>,
-      'expenses',
-      !topMenu && (
-        <NavLink className="menuItem-iocn" to={`${path}/users/testimoniallist`}>
-          <UilBookOpen />
-        </NavLink>
-      ),
-    ),
+    // getItem(
+    //   <NavLink onClick={toggleCollapsed} to={`${path}/users/testimoniallist`}>
+    //     {('Expenses')}
+    //   </NavLink>,
+    //   'expenses',
+    //   !topMenu && (
+    //     <NavLink className="menuItem-iocn" to={`${path}/users/testimoniallist`}>
+    //       <UilBookOpen />
+    //     </NavLink>
+    //   ),
+    // ),
 
     // getItem(
     //   <NavLink onClick={toggleCollapsed} to={`${path}/users/bloglist`}>

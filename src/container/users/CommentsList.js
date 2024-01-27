@@ -1,7 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import UilEye from '@iconscout/react-unicons/icons/uil-eye';
 import UilEdit from '@iconscout/react-unicons/icons/uil-edit';
 import UilTrashAlt from '@iconscout/react-unicons/icons/uil-trash-alt';
@@ -19,10 +19,9 @@ function UserList() {
       users: state.users,
     };
   });
-  
   const navigate = useNavigate();
-  const handleAddNewComment = () => {
-    navigate('/admin/ecommerce/add-comment');
+  const handleAddNewTestimonial = () => {
+    navigate('/admin/ecommerce/add-testimonial');
   };
 
   const usersTableData = [];
@@ -45,7 +44,7 @@ function UserList() {
           </figcaption>
         </div>
       ),
-      email: 'john@gmail.com',
+      category: 'john@gmail.com',
       company: 'Business Development',
       blog_quote: designation,
       joinDate: 'January 20, 2020',
@@ -72,12 +71,12 @@ function UserList() {
         <PageHeader
           className="ninjadash-page-header-main"
           ghost
-          title="Comments"
-          buttons={[
-            <Button className="btn-add_new" size="default" type="primary" key="1" onClick={handleAddNewComment} style={{ backgroundColor: "#47abff" }}>
-              + Add Comment
-            </Button>,
-          ]}
+          title="Users"
+          // buttons={[
+          //   <Button className="btn-add_new" size="default" type="primary" key="1" onClick={handleAddNewTestimonial} style={{ backgroundColor: "#47abff" }}>
+          //     + Add User
+          //   </Button>,
+          // ]}
         />
       </CardToolbox>
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, message } from 'antd';
+import { Table, message, Tooltip } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import UilEdit from '@iconscout/react-unicons/icons/uil-edit';
 import UilTrashAlt from '@iconscout/react-unicons/icons/uil-trash-alt';
@@ -8,25 +8,28 @@ import { TableWrapper } from '../../styled';
 import Heading from '../../../components/heading/heading';
 import { Button } from '../../../components/buttons/buttons';
 import { Cards } from '../../../components/cards/frame/cards-frame';
+import { Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { adminUrl } from '../../../apiUrls/apiUrls';
 
 
 function UserListTable() {
   const [usersTableData, setUsersTableData] = useState([]);
-  // const [state, setState] = useState({});
   const navigate = useNavigate();
 
-
-  // user data in the table
   const handleRefresh = () => {
-    fetch(`${adminUrl}/comments`)
+    fetch(`${adminUrl}/users/all_users`)
       .then((response) => response.json())
       .then((data) => {
-        setUsersTableData(data);
+        if (data.status === 100) {
+          setUsersTableData(data.data); 
+        } else {
+          message.error('Failed to fetch users data');
+        }
       })
       .catch((error) => {
         console.error(error);
-        message.error('An error occurred while fetching users user');
+        message.error('An error occurred while fetching users data');
       });
   };
 
@@ -34,48 +37,94 @@ function UserListTable() {
     handleRefresh();
   }, []);
 
-  const handleClick = (commment_id) => {
-    const commentId = commment_id;
-    console.log('Clicked comment ID:', commentId);
-    navigate(`/admin/ecommerce/edit-comment/${commentId}`);
+  const handleClickEdit = (user_id) => {
+    // Implement navigation or action to edit user
+    console.log('Clicked Edit User ID:', user_id);
+    // navigate to edit user page with user_id
+  };
+
+  const showDeleteConfirm = (user_id) => {
+    Modal.confirm({
+      title: 'Are you sure you want to Suspend User?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'This action cannot be undone',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        handleClickDelete(user_id);
+      },
+    });
+  };
+  
+
+  const handleClickDelete = (user_id) => {
+    fetch(`${adminUrl}/users/deactivate_user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user_id }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 100) {
+        message.success('User deactivated successfully');
+        handleRefresh();
+      } else {
+        message.error(data.message || 'Failed to deactivate user');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+        message.error('An error occurred while deactivating user');
+    });
   };
 
   const usersTableColumns = [
     {
-      title: 'Id',
-      dataIndex: 'id',
-      key: 'id',
+      title: 'User ID',
+      dataIndex: 'user_id',
+      key: 'user_id',
     },
     {
-      title: 'Blog Id',
-      dataIndex: 'blog_id',
-      key: 'blog_id',
-    },
-    {
-      title: 'full_name',
+      title: 'Full Name',
       dataIndex: 'full_name',
       key: 'full_name',
+      render: (text, record) => `${record.first_name} ${record.last_name}`,
     },
     {
-      title: 'Phone Number',
+      title: 'Email',
       dataIndex: 'email',
       key: 'email',
     },
     {
-      title: 'message',
-      dataIndex: 'message',
-      key: 'message',
+      title: 'Balance',
+      dataIndex: 'balance',
+      key: 'balance',
     },
     {
-      title: 'created_at',
-      dataIndex: 'created_at',
-      key: 'created_at',
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
     },
     {
       title: 'Actions',
-      dataIndex: 'action',
-      key: 'action',
-      width: '90px',
+      key: 'actions',
+      render: (_, record) => (
+        <div className="table-actions">
+          {/* <Tooltip title="Edit">
+            <Button className="btn-icon" type="info" shape="circle" onClick={() => handleClickEdit(record.user_id)}>
+              <UilEdit />
+            </Button>
+          </Tooltip> */}
+          <Tooltip title="Suspend">
+            <Button className="btn-icon" type="danger" shape="circle" onClick={() => showDeleteConfirm(record.user_id)}>
+              <UilTrashAlt />
+            </Button>
+          </Tooltip>
+        </div>
+      ),
     },
   ];
 
@@ -84,64 +133,9 @@ function UserListTable() {
       <UserTableStyleWrapper>
         <TableWrapper className="table-responsive">
           <Table
-            dataSource={usersTableData.map((user, key) => ({
-              user: (
-                <div className="user-info" key={key}>
-                  <figcaption>
-                    <Heading className="user-name" as="h6">
-                      {user.name}
-                    </Heading>
-                    <span className="user-designation">{user.designation}</span>
-                  </figcaption>
-                </div>
-              ),
-              id: user.commment_id,
-              blog_id: user.blog_id,
-              full_name: (
-                <div className="user-info">
-                  <figure>
-                    <img style={{ width: '40px' }} src={user.photo} alt="" />
-                  </figure>
-                  <figcaption>
-                    <Heading className="user-name" as="h6">
-                      {user.full_name}
-                    </Heading>
-                  </figcaption>
-                </div>
-              ),
-              email: user.email,
-              message: user.message,
-              created_at: user.created_at,
-              action: (
-                <div className="table-actions">
-                  <Button className="btn-icon" type="info" shape="circle" onClick={() => handleClick(user.commment_id)}>
-                    <UilEdit />
-                  </Button>
-                  <Button
-                    className="btn-icon"
-                    type="danger"
-                    shape="circle"
-                    onClick={() => {
-                      fetch(`${adminUrl}/comments/${user.commment_id}`, {
-                        method: 'DELETE',
-                      })
-                        .then(() => {
-                          setUsersTableData(usersTableData.filter((item) => item.commment_id !== user.commment_id));
-                          message.success('User deleted successfully');
-                          handleRefresh();
-                        })
-                        .catch((error) => {
-                          console.error(error);
-                          message.error('An error occurred while deleting user');
-                        });
-                    }}
-                  >
-                    <UilTrashAlt />
-                  </Button>
-                </div>
-              ),
-            }))}
+            dataSource={usersTableData}
             columns={usersTableColumns}
+            rowKey="user_id"
             pagination={{
               defaultPageSize: 5,
               total: usersTableData.length,

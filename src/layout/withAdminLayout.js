@@ -128,8 +128,8 @@ const ThemeLayout = (WrappedComponent) => {
                       <img
                         src={
                           layoutMode === 'lightMode'
-                            ? require(`../static/img/logo.png`)
-                            : require(`../static/img/logo-white.png`)
+                            ? require(`../static/img/logo-newz.png`)
+                            : require(`../static/img/logo-new.png`)
                         }
                         alt=""
                       />
