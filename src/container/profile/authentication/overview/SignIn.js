@@ -101,12 +101,17 @@ function SignIn() {
 
   const handleSubmit = useCallback(async (values) => {
     try {
+      const requestBody = {
+        ...values,
+        type: "ADMIN"
+      };
+
       const response = await fetch(`${adminUrl}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(requestBody),
       });
 
       const data = await response.json();
@@ -114,6 +119,7 @@ function SignIn() {
       if (data.status === 100) {
         dispatch(login(data.data.token));
         localStorage.setItem('login', 'true');
+        localStorage.setItem('member_details', JSON.stringify(data.data));
         navigate('/admin');
       } else {
         message.error(data.message || 'Login failed, please try again.');
