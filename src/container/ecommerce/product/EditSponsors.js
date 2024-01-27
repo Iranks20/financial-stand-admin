@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Form, InputNumber, Select, message } from 'antd';
 import { PageHeader } from '../../../components/page-headers/page-headers';
 import { Cards } from '../../../components/cards/frame/cards-frame';
 import { Main, BasicFormWrapper } from '../../styled';
 import { Button } from '../../../components/buttons/buttons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { adminUrl } from '../../../apiUrls/apiUrls';
 
 const { Option } = Select;
@@ -12,7 +12,17 @@ const { Option } = Select;
 function LoanPayment() {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
+
+  // Extracting loan data from state (passed from previous component)
+  const { loan_id } = location.state.loan || {};
+
+  useEffect(() => {
+    if (loan_id) {
+      form.setFieldsValue({ loan_id });
+    }
+  }, [loan_id, form]);
 
   const handleSubmit = (values) => {
     setLoading(true);
