@@ -31,7 +31,7 @@ function UserListTable() {
             }
             return {
               title: item.name,
-              amount: `$${item.total_amount || item.total_loans}`,
+              amount: `Shs${item.total_amount || item.total_loans}`,
               icon: icon,
             };
           });
