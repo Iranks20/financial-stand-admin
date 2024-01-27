@@ -11,7 +11,10 @@ function OTPVerification() {
   const location = useLocation();
   const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const user_id = localStorage.getItem('user_id');
+  const memberData = localStorage.getItem('member_details');
+  const parsedData = JSON.parse(memberData);
+  const user_id = parsedData.user_id
+  console.log('current user id :', user_id)
 
   const handleSubmit = useCallback(async (values) => {
     if (!user_id) {
@@ -20,7 +23,7 @@ function OTPVerification() {
     }
 
     try {
-      const response = await fetch(`${adminUrl}/users/verifyOTP`, { // Replace adminUrl with your actual server URL
+      const response = await fetch(`${adminUrl}/users/verifyOTP`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +39,7 @@ function OTPVerification() {
       if (data.status === 100) {
         dispatch(login(data.data.token)); // Assuming the token is needed for login
         localStorage.setItem('login', 'true'); // Update local storage as necessary
-        navigate('/admin');
+        navigate('/user');
       } else {
         message.error(data.message || 'Verification failed, please try again.');
       }

@@ -1,16 +1,11 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
-import UilEye from '@iconscout/react-unicons/icons/uil-eye';
-import UilEdit from '@iconscout/react-unicons/icons/uil-edit';
-import UilTrashAlt from '@iconscout/react-unicons/icons/uil-trash-alt';
-import { Link } from 'react-router-dom';
 import UserListTable from '../pages/overview/TestimonialsTable';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { Main, CardToolbox } from '../styled';
-import Heading from '../../components/heading/heading';
-import { Button } from '../../components/buttons/buttons';
+import { adminUrl } from '../../apiUrls/apiUrls';
+
 
 function UserList() {
   const { users } = useSelector((state) => {
@@ -19,64 +14,47 @@ function UserList() {
       users: state.users,
     };
   });
-  const navigate = useNavigate();
-  const handleAddNewTestimonial = () => {
-    navigate('/admin/ecommerce/add-testimonial');
-  };
 
-  const usersTableData = [];
+  const [userName, setUserName] = useState('');
+  const [userBalance, setUserBalance] = useState('Loading...');
 
-  users.map((user) => {
-    const { id, full_name, designation, img, status } = user;
+  useEffect(() => {
+    const memberDetails = JSON.parse(localStorage.getItem('member_details'));
+    if (memberDetails) {
+      setUserName(memberDetails.first_name || '');
 
-    return usersTableData.push({
-      key: id,
-      user: (
-        <div className="user-info">
-          <figure>
-            <img style={{ width: '40px' }} src={require(`../../${img}`)} alt="" />
-          </figure>
-          <figcaption>
-            <Heading className="user-name" as="h6">
-              {full_name}
-            </Heading>
-            <span className="user-designation">San Francisco, CA</span>
-          </figcaption>
-        </div>
-      ),
-      category: 'john@gmail.com',
-      company: 'Business Development',
-      blog_quote: designation,
-      joinDate: 'January 20, 2020',
-      status: <span className={`status-text ${status}`}>{status}</span>,
-      action: (
-        <div className="table-actions">
-          <Button className="btn-icon" type="primary" to="#" shape="circle">
-            <UilEye />
-          </Button>
-          <Button className="btn-icon" type="info" to="#" shape="circle">
-            <UilEdit />
-          </Button>
-          <Button className="btn-icon" type="danger" to="#" shape="circle">
-            <UilTrashAlt />
-          </Button>
-        </div>
-      ),
-    });
-  });
+      // Fetch user details including balance
+      fetch(`${adminUrl}/users/user_details`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id: memberDetails.user_id }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 100 && data.data) {
+          setUserBalance(data.data.balance);
+        } else {
+          setUserBalance('Unable to fetch balance');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching user balance:', error);
+        setUserBalance('Error fetching balance');
+      });
+    }
+  }, []);
+
+  // ... rest of your code ...
 
   return (
     <>
-      <CardToolbox>
+      <CardToolbox style={{ display: 'flex', justifyContent: 'center' }}>
         <PageHeader
           className="ninjadash-page-header-main"
           ghost
-          title="Users"
-          // buttons={[
-          //   <Button className="btn-add_new" size="default" type="primary" key="1" onClick={handleAddNewTestimonial} style={{ backgroundColor: "#47abff" }}>
-          //     + Add User
-          //   </Button>,
-          // ]}
+          title={`${userName}, Your total Savings are: ${userBalance}`}
         />
       </CardToolbox>
 

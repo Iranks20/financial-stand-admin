@@ -37,8 +37,8 @@ function ProviderConfig() {
     const localStorageLogin = localStorage.getItem('login');
     setIsLoading(false);
 
-    if ((localStorageLogin === 'true' || auth.login) && history.location.pathname !== "/admin") {
-      history.push('/admin');
+    if ((localStorageLogin === 'true' || auth.login) && history.location.pathname !== "/user") {
+      history.push('/user');
     }
   }, [auth.login]);
 
@@ -58,7 +58,7 @@ function ProviderConfig() {
               <Router>
                 <Routes>
                   {loginStatus === 'true' ? (
-                    <Route path="/admin*" element={<Admin />} />
+                    <Route path="/user*" element={<Admin />} />
                   ) : (
                     <Route path="/*" element={<Auth />} />
                   )}

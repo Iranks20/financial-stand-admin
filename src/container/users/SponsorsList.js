@@ -73,11 +73,6 @@ function UserList() {
           className="ninjadash-page-header-main"
           ghost
           title="Loans"
-          buttons={[
-            <Button className="btn-add_new" size="default" type="primary" key="1" onClick={handleAddNewSponsor} style={{ backgroundColor: "#47abff" }}>
-              + Add Loans
-            </Button>,
-          ]}
         />
       </CardToolbox>
 

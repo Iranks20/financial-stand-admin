@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Table, message, Tooltip } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import UilEdit from '@iconscout/react-unicons/icons/uil-edit';
-import UilTrashAlt from '@iconscout/react-unicons/icons/uil-trash-alt';
+import { Table, message } from 'antd';
 import { UserTableStyleWrapper } from '../style';
 import { TableWrapper } from '../../styled';
-import { Button } from '../../../components/buttons/buttons';
 import { Cards } from '../../../components/cards/frame/cards-frame';
 import { adminUrl } from '../../../apiUrls/apiUrls';
 import moment from 'moment';
 
 function FinesListTable() {
   const [finesTableData, setFinesTableData] = useState([]);
-  const navigate = useNavigate();
 
   const handleRefresh = () => {
-    fetch(`${adminUrl}/fines/all_fines`)
+    // Retrieve user_id from localStorage
+    const memberDetails = JSON.parse(localStorage.getItem('member_details'));
+    const userId = memberDetails && memberDetails.user_id;
+
+    if (userId) {
+      fetch(`${adminUrl}/fines/my_fines`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id: userId }),
+      })
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 100) {
@@ -28,19 +34,14 @@ function FinesListTable() {
         console.error(error);
         message.error('An error occurred while fetching fines data');
       });
+    } else {
+      message.error('User details not found');
+    }
   };
 
   useEffect(() => {
     handleRefresh();
   }, []);
-
-  const handleClickEdit = (fine_id) => {
-    console.log('Clicked Edit Fine ID:', fine_id);
-  };
-
-  const handleClickDelete = (fine_id) => {
-    console.log('Clicked Delete Fine ID:', fine_id);
-  };
 
   const finesTableColumns = [
     {
@@ -75,24 +76,6 @@ function FinesListTable() {
       key: 'date_time',
       render: date_time => moment(date_time).format('MMMM Do YYYY, h:mm:ss a'),
     },
-    // {
-    //   title: 'Actions',
-    //   key: 'actions',
-    //   render: (_, record) => (
-    //     <div className="table-actions">
-    //       <Tooltip title="Edit">
-    //         <Button className="btn-icon" type="info" shape="circle" onClick={() => handleClickEdit(record.fine_id)}>
-    //           <UilEdit />
-    //         </Button>
-    //       </Tooltip>
-    //       <Tooltip title="Delete">
-    //         <Button className="btn-icon" type="danger" shape="circle" onClick={() => handleClickDelete(record.fine_id)}>
-    //           <UilTrashAlt />
-    //         </Button>
-    //       </Tooltip>
-    //     </div>
-    //   ),
-    // },
   ];
 
   return (

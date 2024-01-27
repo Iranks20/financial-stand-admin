@@ -123,13 +123,13 @@ const ThemeLayout = (WrappedComponent) => {
                   <div className="navbar-brand align-cener-v">
                     <Link
                       className={topMenu && window.innerWidth > 991 ? 'ninjadash-logo top-menu' : 'ninjadash-logo'}
-                      to="/admin"
+                      to="/user"
                     >
                       <img
                         src={
                           layoutMode === 'lightMode'
-                            ? require(`../static/img/logo.png`)
-                            : require(`../static/img/logo-white.png`)
+                            ? require(`../static/img/logos-new.png`)
+                            : require(`../static/img/logos-new.png`)
                         }
                         alt=""
                       />

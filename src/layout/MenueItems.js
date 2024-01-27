@@ -34,7 +34,7 @@ function MenuItems({ toggleCollapsed }) {
 
   const dispatch = useDispatch();
 
-  const path = '/admin';
+  const path = '/user';
 
   // const pathName = window.location.pathname;
   // const pathArray = pathName.split(path);
@@ -98,7 +98,7 @@ function MenuItems({ toggleCollapsed }) {
     ),
     getItem(
       <NavLink onClick={toggleCollapsed} to={`${path}/users/testimoniallist`}>
-        {('Users')}
+        {('My Savings')}
       </NavLink>,
       'users',
       !topMenu && (
@@ -108,17 +108,17 @@ function MenuItems({ toggleCollapsed }) {
       ),
     ),
 
-    getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}/users/aboutlist`}>
-        {('Savings')}
-      </NavLink>,
-      'about',
-      !topMenu && (
-        <NavLink className="menuItem-iocn" to={`${path}/users/aboutlist`}>
-          <UilBookOpen />
-        </NavLink>
-      ),
-    ),
+    // getItem(
+    //   <NavLink onClick={toggleCollapsed} to={`${path}/users/aboutlist`}>
+    //     {('My Savings')}
+    //   </NavLink>,
+    //   'about',
+    //   !topMenu && (
+    //     <NavLink className="menuItem-iocn" to={`${path}/users/aboutlist`}>
+    //       <UilBookOpen />
+    //     </NavLink>
+    //   ),
+    // ),
     // getItem(
     //   <NavLink onClick={toggleCollapsed} to={`${path}/users/commentlist`}>
     //     {t('Comments')}
@@ -157,7 +157,7 @@ function MenuItems({ toggleCollapsed }) {
 
     getItem(
       <NavLink onClick={toggleCollapsed} to={`${path}/users/headingslist`}>
-        {t('Fines')}
+        {t('My Fines')}
       </NavLink>,
       'fines',
       !topMenu && (
@@ -168,7 +168,7 @@ function MenuItems({ toggleCollapsed }) {
     ),
     getItem(
       <NavLink onClick={toggleCollapsed} to={`${path}/users/sponsorslist`}>
-        {('Loans')}
+        {('My Loans')}
       </NavLink>,
       'loans',
       !topMenu && (
@@ -177,17 +177,17 @@ function MenuItems({ toggleCollapsed }) {
         </NavLink>
       ),
     ),
-    getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}/users/testimoniallist`}>
-        {('Expenses')}
-      </NavLink>,
-      'expenses',
-      !topMenu && (
-        <NavLink className="menuItem-iocn" to={`${path}/users/testimoniallist`}>
-          <UilBookOpen />
-        </NavLink>
-      ),
-    ),
+    // getItem(
+    //   <NavLink onClick={toggleCollapsed} to={`${path}/users/testimoniallist`}>
+    //     {('Expenses')}
+    //   </NavLink>,
+    //   'expenses',
+    //   !topMenu && (
+    //     <NavLink className="menuItem-iocn" to={`${path}/users/testimoniallist`}>
+    //       <UilBookOpen />
+    //     </NavLink>
+    //   ),
+    // ),
 
     // getItem(
     //   <NavLink onClick={toggleCollapsed} to={`${path}/users/bloglist`}>

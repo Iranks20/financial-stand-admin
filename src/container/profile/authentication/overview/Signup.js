@@ -29,7 +29,7 @@ function SignUp() {
           lastName: values.lastName,
           email: values.email,
           password: values.password,
-          type: 'ADMIN'
+          type: 'MEMBER'
         }),
       });
 
@@ -37,13 +37,15 @@ function SignUp() {
 
       if (data.status === 100) {
         dispatch(register(data.data.token));
-        message.success(data.message);
-        localStorage.setItem('user_id', data.data.user_id);
-        // localStorage.setItem('login', 'true');
+        message.success("otp sent to your email");
+      
+        localStorage.setItem('member_details', JSON.stringify(data.data));
+      
         navigate('/otp');
       } else {
         message.error(data.message || 'Registration failed, please try again.');
       }
+      
     } catch (error) {
       message.error('An error occurred. Please try again.');
     }
