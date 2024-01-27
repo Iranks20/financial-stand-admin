@@ -9,7 +9,7 @@ function UserListTable() {
   const [cardData, setCardData] = useState([]);
 
   useEffect(() => {
-    fetch(`${adminUrl}/loans/add_loan`)
+    fetch(`${adminUrl}/users/admin/total_inputs`)
       .then(response => response.json())
       .then(data => {
         if (data.status === 100) {
