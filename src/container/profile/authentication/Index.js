@@ -12,7 +12,7 @@ const AuthLayout = (WraperContent) => {
           </div>
         }
       >
-        <AuthenticationWrap style={{ backgroundImage: `url("${require('../../../static/img/logo-newz.png')}")` }}>
+        <AuthenticationWrap>
           <div className="ninjadash-authentication-wrap">
             <div className="ninjadash-authentication-brand">
               <img src={require(`../../../static/img/logo-new.png`)} alt="failed" />
