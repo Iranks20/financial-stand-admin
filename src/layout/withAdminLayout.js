@@ -123,7 +123,7 @@ const ThemeLayout = (WrappedComponent) => {
                   <div className="navbar-brand align-cener-v">
                     <Link
                       className={topMenu && window.innerWidth > 991 ? 'ninjadash-logo top-menu' : 'ninjadash-logo'}
-                      to="/user"
+                      to="http://financialstand.club" target="_blank"
                     >
                       <img
                         src={
@@ -132,6 +132,7 @@ const ThemeLayout = (WrappedComponent) => {
                             : require(`../static/img/logos-new.png`)
                         }
                         alt=""
+                        style={{ height: "80px", width: "100%" }}
                       />
                     </Link>
                     {!topMenu || window.innerWidth <= 991 ? (

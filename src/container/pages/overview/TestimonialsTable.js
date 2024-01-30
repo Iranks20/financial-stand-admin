@@ -45,19 +45,15 @@ function SavingsListTable() {
 
   const savingsTableColumns = [
     {
-      title: 'Saving ID',
-      dataIndex: 'saving_id',
-      key: 'saving_id',
+      title: 'Date & Time',
+      dataIndex: 'date_time',
+      key: 'date_time',
+      render: date_time => moment(date_time).format('MMMM Do YYYY'),
     },
     {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
-    },
-    {
-      title: 'User ID',
-      dataIndex: 'user_id',
-      key: 'user_id',
     },
     {
       title: 'Contributor',
@@ -66,11 +62,16 @@ function SavingsListTable() {
       render: (text, record) => `${record.first_name} ${record.last_name}`,
     },
     {
-      title: 'Date & Time',
-      dataIndex: 'date_time',
-      key: 'date_time',
-      render: date_time => moment(date_time).format('MMMM Do YYYY, h:mm:ss a'),
+      title: 'Saving ID',
+      dataIndex: 'saving_id',
+      key: 'saving_id',
     },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      key: 'action',
+    },
+    
   ];
 
   return (
@@ -82,7 +83,7 @@ function SavingsListTable() {
             columns={savingsTableColumns}
             rowKey="saving_id"
             pagination={{
-              defaultPageSize: 5,
+              defaultPageSize: 10,
               total: savingsTableData.length,
               showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
             }}

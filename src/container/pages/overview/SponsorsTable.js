@@ -45,19 +45,15 @@ function LoansListTable() {
 
   const loansTableColumns = [
     {
-      title: 'Loan ID',
-      dataIndex: 'loan_id',
-      key: 'loan_id',
+      title: 'Date & Time',
+      dataIndex: 'date_time',
+      key: 'date_time',
+      render: date_time => moment(date_time).format('MMMM Do YYYY'),
     },
     {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
-    },
-    {
-      title: 'Paid Amount',
-      dataIndex: 'paid_amount',
-      key: 'paid_amount',
     },
     {
       title: 'Borrower',
@@ -70,17 +66,51 @@ function LoansListTable() {
       render: (_, record) => record.guarrantor_id ? `${record.guarrantor_first_name} ${record.guarrantor_last_name}` : 'N/A',
     },
     {
-      title: 'Date & Time',
-      dataIndex: 'date_time',
-      key: 'date_time',
-      render: date_time => moment(date_time).format('MMMM Do YYYY, h:mm:ss a'),
-    },
-    {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
     },
-  ];
+    {
+      title: 'Paid Amount',
+      dataIndex: 'paid_amount',
+      key: 'paid_amount',
+    },
+    {
+      title: 'Loan Balance',
+      dataIndex: 'LoanBalance',
+      key: 'LoanBalance',
+    },
+    {
+      title: 'Transfer Fees',
+      dataIndex: 'TransferFees',
+      key: 'TransferFees',
+    },
+    {
+      title: 'Interest Amount',
+      dataIndex: 'InterestAmount',
+      key: 'InterestAmount',
+    },
+    {
+      title: 'Interest Paid',
+      dataIndex: 'InterestPaid',
+      key: 'InterestPaid',
+    },
+    {
+      title: 'Interest Balance',
+      dataIndex: 'InterestBalance',
+      key: 'InterestBalance',
+    },
+    {
+      title: 'Period',
+      dataIndex: 'period',
+      key: 'period',
+    },
+    {
+      title: 'Loan ID',
+      dataIndex: 'loan_id',
+      key: 'loan_id',
+    },
+  ]
 
   return (
     <Cards headless>
