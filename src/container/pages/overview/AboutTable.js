@@ -86,19 +86,15 @@ function SavingsListTable() {
 
   const savingsTableColumns = [
     {
-      title: 'Saving ID',
-      dataIndex: 'saving_id',
-      key: 'saving_id',
+      title: 'Date & Time',
+      dataIndex: 'date_time',
+      key: 'date_time',
+      render: date_time => moment(date_time).format('MMMM Do YYYY'),
     },
     {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
-    },
-    {
-      title: 'User ID',
-      dataIndex: 'user_id',
-      key: 'user_id',
     },
     {
       title: 'Contributor',
@@ -107,21 +103,16 @@ function SavingsListTable() {
       render: (text, record) => `${record.first_name} ${record.last_name}`,
     },
     {
-      title: 'Date & Time',
-      dataIndex: 'date_time',
-      key: 'date_time',
-      render: date_time => moment(date_time).format('MMMM Do YYYY, h:mm:ss a'),
+      title: 'Saving ID',
+      dataIndex: 'savingID',
+      key: 'savingID',
+      render: (text, record) => `${record.saving_id}`,
     },
     {
       title: 'Actions',
       key: 'actions',
       render: (_, record) => (
         <div className="table-actions">
-          <Tooltip title="Edit">
-            <Button className="btn-icon" type="info" shape="circle" onClick={() => handleClickEdit(record.saving_id)}>
-              <UilEdit />
-            </Button>
-          </Tooltip>
           <Tooltip title="Delete">
             <Button className="btn-icon" type="danger" shape="circle" onClick={() => showDeleteConfirm(record.saving_id)}>
               <UilTrashAlt />

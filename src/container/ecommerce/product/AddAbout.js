@@ -14,6 +14,7 @@ function FineAdding() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState('');
+  const [reason, setReason] = useState("")
   const [loading, setLoading] = useState(false); // State to handle loading
 
   useEffect(() => {
@@ -111,7 +112,21 @@ function FineAdding() {
                                 </Select>
                               </Form.Item>
                               <Form.Item name="reason" label="Reason" rules={[{ required: true, message: 'Please input the reason!' }]}>
-                                <Input placeholder="Reason for the fine" />
+                                <Select
+                                  showSearch
+                                  placeholder="Select reason "
+                                  optionFilterProp="children"
+                                  onSearch={null}
+                                  onSelect={(value) => setReason(value)}
+                                  filterOption={false}
+                                >
+                                    <Option key="MISSED_MEETING" value="MISSED_MEETING">
+                                      MISSED MEETING
+                                    </Option>
+                                    <Option key="LATE_SAVING" value="LATE_SAVING">
+                                      LATE SAVING
+                                    </Option>
+                                </Select>
                               </Form.Item>
                               <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Please input the amount!' }]}>
                                 <InputNumber prefix="shs" style={{ width: '100%' }} />

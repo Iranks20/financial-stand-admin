@@ -19,6 +19,11 @@ function LoansListTable() {
     navigate(`/admin/ecommerce/edit-sponsor`, { state: { loan } });
   };
 
+
+  const handlePayInterest = (loan) => {
+    navigate(`/admin/ecommerce/edit-product`, { state: { loan } });
+  };
+
   const handleRefresh = () => {
     fetch(`${adminUrl}/loans/all_loans`)
       .then((response) => response.json())
@@ -48,19 +53,15 @@ function LoansListTable() {
 
   const loansTableColumns = [
     {
-      title: 'Loan ID',
-      dataIndex: 'loan_id',
-      key: 'loan_id',
+      title: 'Date & Time',
+      dataIndex: 'date_time',
+      key: 'date_time',
+      render: date_time => moment(date_time).format('MMMM Do YYYY'),
     },
     {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
-    },
-    {
-      title: 'Paid Amount',
-      dataIndex: 'paid_amount',
-      key: 'paid_amount',
     },
     {
       title: 'Borrower',
@@ -73,15 +74,49 @@ function LoansListTable() {
       render: (_, record) => record.guarrantor_id ? `${record.guarrantor_first_name} ${record.guarrantor_last_name}` : 'N/A',
     },
     {
-      title: 'Date & Time',
-      dataIndex: 'date_time',
-      key: 'date_time',
-      render: date_time => moment(date_time).format('MMMM Do YYYY, h:mm:ss a'),
-    },
-    {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
+    },
+    {
+      title: 'Paid Amount',
+      dataIndex: 'paid_amount',
+      key: 'paid_amount',
+    },
+    {
+      title: 'Loan Balance',
+      dataIndex: 'LoanBalance',
+      key: 'LoanBalance',
+    },
+    {
+      title: 'Transfer Fees',
+      dataIndex: 'TransferFees',
+      key: 'TransferFees',
+    },
+    {
+      title: 'Interest Amount',
+      dataIndex: 'InterestAmount',
+      key: 'InterestAmount',
+    },
+    {
+      title: 'Interest Paid',
+      dataIndex: 'InterestPaid',
+      key: 'InterestPaid',
+    },
+    {
+      title: 'Interest Balance',
+      dataIndex: 'InterestBalance',
+      key: 'InterestBalance',
+    },
+    {
+      title: 'Period',
+      dataIndex: 'period',
+      key: 'period',
+    },
+    {
+      title: 'Loan ID',
+      dataIndex: 'loan_id',
+      key: 'loan_id',
     },
     {
       title: 'Actions',
@@ -90,6 +125,11 @@ function LoansListTable() {
         <div className="table-actions">
           <Tooltip title="Pay Loan">
             <Button className="btn-icon" type="info" onClick={() => handleClickEdit(record)} shape="circle">
+              <UilEye />
+            </Button>
+          </Tooltip>
+          <Tooltip title="Pay Interest">
+            <Button className="btn-icon" type="info" onClick={() => handlePayInterest(record)} shape="circle">
               <UilEye />
             </Button>
           </Tooltip>
@@ -107,7 +147,7 @@ function LoansListTable() {
             columns={loansTableColumns}
             rowKey="loan_id"
             pagination={{
-              defaultPageSize: 5,
+              defaultPageSize: 10,
               total: loansTableData.length,
               showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
             }}

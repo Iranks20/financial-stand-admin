@@ -44,19 +44,15 @@ function FinesListTable() {
 
   const finesTableColumns = [
     {
-      title: 'Fine ID',
-      dataIndex: 'fine_id',
-      key: 'fine_id',
+      title: 'Date & Time',
+      dataIndex: 'date_time',
+      key: 'date_time',
+      render: date_time => moment(date_time).format('MMMM Do YYYY'),
     },
     {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
-    },
-    {
-      title: 'User ID',
-      dataIndex: 'user_id',
-      key: 'user_id',
     },
     {
       title: 'Contributor',
@@ -70,11 +66,11 @@ function FinesListTable() {
       key: 'reason',
     },
     {
-      title: 'Date & Time',
-      dataIndex: 'date_time',
-      key: 'date_time',
-      render: date_time => moment(date_time).format('MMMM Do YYYY, h:mm:ss a'),
+      title: 'Fine ID',
+      dataIndex: 'fine_id',
+      key: 'fine_id',
     },
+
     // {
     //   title: 'Actions',
     //   key: 'actions',

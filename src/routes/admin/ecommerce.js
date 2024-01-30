@@ -7,7 +7,7 @@ const ProductEdit = lazy(() => import('../../container/ecommerce/product/EditPro
 const BlogEdit = lazy(() => import('../../container/ecommerce/product/EditBlog'));
 const AddBlogs = lazy(() => import('../../container/ecommerce/product/AddBlogs'));
 const AddFaqs = lazy(() => import('../../container/ecommerce/product/AddFaqs'));
-const EditFaq = lazy(() => import('../../container/ecommerce/product/EditFaq'));
+const UpdateShares = lazy(() => import('../../container/ecommerce/product/EditFaq'));
 const TestimonialEdit = lazy(() => import('../../container/ecommerce/product/EditTestimonial'));
 const EditComments = lazy(() => import('../../container/ecommerce/product/EditComments'));
 const AddTestimonial = lazy(() => import('../../container/ecommerce/product/AddTestimonial'));
@@ -31,7 +31,7 @@ function EcommerceRoute() {
       <Route path="products/*" element={<Product />} />
       <Route exact path="add-product" element={<ProductAdd />} />
       <Route exact path="addfaqs" element={<AddFaqs />} />
-      <Route exact path="editfaq/:faqId" element={<EditFaq />} />
+      <Route exact path="update-shares" element={<UpdateShares />} />
       <Route exact path="edit-product" element={<ProductEdit />} />
       <Route exact path="edit-blog/:blogId" element={<BlogEdit />} />
       <Route exact path="add-blog" element={<AddBlogs />} />

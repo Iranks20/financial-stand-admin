@@ -16,11 +16,12 @@ function LoanPayment() {
   const [loading, setLoading] = useState(false);
 
   // Extracting loan data from state (passed from previous component)
-  const { loan_id } = location.state.loan || {};
+  const { loan_id, first_name, last_name } = location.state.loan || {};
 
   useEffect(() => {
     if (loan_id) {
       form.setFieldsValue({ loan_id });
+      form.setFieldsValue({ first_last_name: first_name + " " + last_name });
     }
   }, [loan_id, form]);
 
@@ -34,7 +35,6 @@ function LoanPayment() {
       body: JSON.stringify({
         loan_id: values.loan_id,
         amount: values.amount,
-        type: values.type,
       }),
     })
     .then((response) => response.json())
@@ -71,14 +71,11 @@ function LoanPayment() {
                             <Form.Item name="loan_id" label="Loan ID" rules={[{ required: true }]}>
                               <InputNumber style={{ width: '100%' }} disabled />
                             </Form.Item>
+                            <Form.Item name="first_last_name" label="Member Account" rules={[{ required: true }]}>
+                              <InputNumber style={{ width: '100%' }} disabled />
+                            </Form.Item>
                             <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Please input the amount!' }]}>
                               <InputNumber style={{ width: '100%' }} />
-                            </Form.Item>
-                            <Form.Item name="type" label="Payment Type" rules={[{ required: true, message: 'Please select a payment type!' }]}>
-                              <Select placeholder="Select a payment type">
-                                <Option value="WALLET">WALLET</Option>
-                                <Option value="CASH">CASH</Option>
-                              </Select>
                             </Form.Item>
                           </Cards>
                         </div>

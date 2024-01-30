@@ -66,6 +66,7 @@ function LoanAdding() {
         user_id: selectedUserId,
         guarrantor_id: selectedGuarantorId,
         amount: values.amount,
+        period: values.period
       }),
     })
       .then((response) => response.json())
@@ -115,7 +116,7 @@ function LoanAdding() {
                                 ))}
                               </Select>
                             </Form.Item>
-                            <Form.Item name="guarantor_id" label="Guarantor" rules={[{ required: true, message: 'Please select a guarantor!' }]}>
+                            <Form.Item name="guarantor_id" label="Guarantor">
                               <Select
                                 showSearch
                                 placeholder="Search guarantor by name"
@@ -130,6 +131,9 @@ function LoanAdding() {
                                   </Option>
                                 ))}
                               </Select>
+                            </Form.Item>
+                            <Form.Item name="period" label="Period" rules={[{ required: true, message: 'Please input the period!' }]}>
+                              <InputNumber prefix="Months" style={{ width: '100%' }} />
                             </Form.Item>
                             <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Please input the amount!' }]}>
                               <InputNumber prefix="shs" style={{ width: '100%' }} />

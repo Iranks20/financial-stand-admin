@@ -21,6 +21,7 @@ function UserListTable() {
     fetch(`${adminUrl}/users/all_users`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         if (data.status === 100) {
           setUsersTableData(data.data); 
         } else {
@@ -81,12 +82,15 @@ function UserListTable() {
     });
   };
 
+  const handleUpdateMembership = (user) => {
+    navigate(`/admin/ecommerce/edit-otcdesk`, { state: { user } });
+  };
+  const handleUpdateShares = (user) => {
+    navigate(`/admin/ecommerce/update-shares`, { state: { user } });
+  };
+
+
   const usersTableColumns = [
-    {
-      title: 'User ID',
-      dataIndex: 'user_id',
-      key: 'user_id',
-    },
     {
       title: 'Full Name',
       dataIndex: 'full_name',
@@ -109,6 +113,16 @@ function UserListTable() {
       key: 'status',
     },
     {
+      title: 'Shares',
+      dataIndex: 'shares',
+      key: 'shares',
+    },
+    {
+      title: 'Membership',
+      dataIndex: 'membership',
+      key: 'membership',
+    },
+    {
       title: 'Actions',
       key: 'actions',
       render: (_, record) => (
@@ -118,11 +132,22 @@ function UserListTable() {
               <UilEdit />
             </Button>
           </Tooltip> */}
+          <Tooltip title="Update Shares">
+            <Button className="btn-icon" type="danger" shape="circle" onClick={() => handleUpdateShares(record)}>
+            <UilEdit />
+            </Button>
+          </Tooltip>
+          <Tooltip title="Update Membership">
+            <Button className="btn-icon" type="danger" shape="circle" onClick={() => handleUpdateMembership(record)}>
+            <UilEdit />
+            </Button>
+          </Tooltip>
           <Tooltip title="Suspend">
             <Button className="btn-icon" type="danger" shape="circle" onClick={() => showDeleteConfirm(record.user_id)}>
               <UilTrashAlt />
             </Button>
           </Tooltip>
+          
         </div>
       ),
     },
@@ -137,7 +162,7 @@ function UserListTable() {
             columns={usersTableColumns}
             rowKey="user_id"
             pagination={{
-              defaultPageSize: 5,
+              defaultPageSize: 10,
               total: usersTableData.length,
               showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
             }}
