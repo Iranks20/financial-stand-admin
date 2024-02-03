@@ -66,7 +66,8 @@ function LoanAdding() {
         user_id: selectedUserId,
         guarrantor_id: selectedGuarantorId,
         amount: values.amount,
-        period: values.period
+        period: values.period,
+        transferFees: values.transferFees
       }),
     })
       .then((response) => response.json())
@@ -136,6 +137,9 @@ function LoanAdding() {
                               <InputNumber prefix="Months" style={{ width: '100%' }} />
                             </Form.Item>
                             <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Please input the amount!' }]}>
+                              <InputNumber prefix="shs" style={{ width: '100%' }} />
+                            </Form.Item>
+                            <Form.Item name="transferFees" label="Trasnfer Fees" rules={[{ required: true, message: 'Please input the fees!' }]}>
                               <InputNumber prefix="shs" style={{ width: '100%' }} />
                             </Form.Item>
                           </Cards>
