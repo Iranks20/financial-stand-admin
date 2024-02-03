@@ -119,6 +119,11 @@ function LoansListTable() {
       key: 'loan_id',
     },
     {
+      title: 'Total Balance',
+      dataIndex: 'total_balance',
+      key: 'total_balance',
+    },
+    {
       title: 'Actions',
       key: 'actions',
       render: (_, record) => (
