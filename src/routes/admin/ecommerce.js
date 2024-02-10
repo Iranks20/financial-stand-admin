@@ -1,5 +1,7 @@
 import React, { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import EditWelfare from '../../container/ecommerce/product/addWelfare';
+import ExpenseAdding from '../../container/ecommerce/product/AddExpense';
 
 const Product = lazy(() => import('../../container/ecommerce/product/Products'));
 const ProductAdd = lazy(() => import('../../container/ecommerce/product/AddProduct'));
@@ -32,6 +34,7 @@ function EcommerceRoute() {
       <Route exact path="add-product" element={<ProductAdd />} />
       <Route exact path="addfaqs" element={<AddFaqs />} />
       <Route exact path="update-shares" element={<UpdateShares />} />
+      <Route exact path="update-welfare" element={<EditWelfare />} />
       <Route exact path="edit-product" element={<ProductEdit />} />
       <Route exact path="edit-blog/:blogId" element={<BlogEdit />} />
       <Route exact path="add-blog" element={<AddBlogs />} />
@@ -39,6 +42,7 @@ function EcommerceRoute() {
       <Route exact path="edit-comment/:commentId" element={<EditComments />} />
       <Route exact path="add-testimonial" element={<AddTestimonial />} />
       <Route exact path="add-about" element={<AddAbout />} />
+      <Route exact path="add-expense" element={<ExpenseAdding />} />
       <Route exact path="edit-about" element={<EditAbout />} />
       <Route exact path="add-comment" element={<AddComment />} />
       <Route exact path="productDetails/:id" element={<ProductDetails />} />

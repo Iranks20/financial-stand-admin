@@ -11,6 +11,7 @@ const AboutTable = lazy(() => import('../../container/users/AboutList'));
 const CommentsTable = lazy(() => import('../../container/users/CommentsList'));
 const OtcdeskTable = lazy(() => import('../../container/users/OtcdeskList'));
 const HeadingsTable = lazy(() => import('../../container/users/HeadingsList'));
+const ExpensesTable = lazy(() => import('../../container/users/expenses'));
 const SponsorsTable = lazy(() => import('../../container/users/SponsorsList'));
 const FaqsTable = lazy(() => import('../../container/users/FaqsList'));
 const Team = lazy(() => import('../../container/users/Team'));
@@ -29,6 +30,7 @@ function PagesRoute() {
       <Route path="commentlist" element={<CommentsTable />} />
       <Route path="otcdesklist" element={<OtcdeskTable />} />
       <Route path="headingslist" element={<HeadingsTable />} />
+      <Route path="expenseslist" element={<ExpensesTable />} />
       <Route path="sponsorslist" element={<SponsorsTable />} />
       <Route path="faqslist" element={<FaqsTable />} />
       <Route path="team" element={<Team />} />

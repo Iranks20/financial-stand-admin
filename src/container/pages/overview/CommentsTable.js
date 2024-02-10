@@ -88,6 +88,9 @@ function UserListTable() {
   const handleUpdateShares = (user) => {
     navigate(`/admin/ecommerce/update-shares`, { state: { user } });
   };
+  const handleUpdateWelfare = (user) => {
+    navigate(`/admin/ecommerce/update-welfare`, { state: { user } });
+  };
 
 
   const usersTableColumns = [
@@ -139,6 +142,11 @@ function UserListTable() {
           </Tooltip>
           <Tooltip title="Update Membership">
             <Button className="btn-icon" type="danger" shape="circle" onClick={() => handleUpdateMembership(record)}>
+            <UilEdit />
+            </Button>
+          </Tooltip>
+          <Tooltip title="Update Welfare">
+            <Button className="btn-icon" type="danger" shape="circle" onClick={() => handleUpdateWelfare(record)}>
             <UilEdit />
             </Button>
           </Tooltip>
