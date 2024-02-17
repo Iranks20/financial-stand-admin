@@ -138,7 +138,8 @@ function SignIn() {
       <Col xxl={6} xl={8} md={12} sm={18} xs={24}>
         <AuthFormWrap>
           <div className="ninjadash-authentication-top">
-            <h2 className="ninjadash-authentication-top__title">Sign in To Financial Stand Savings Group</h2>
+            <Link style={{float: "left"}} to="http://financialstand.club">Back to login</Link>
+            <h2 className="ninjadash-authentication-top__title">SignIn To Your Account</h2>
           </div>
           <div className="ninjadash-authentication-content">
             <Form name="login" form={form} onFinish={handleSubmit} layout="vertical">
