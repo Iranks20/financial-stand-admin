@@ -55,61 +55,6 @@ function LoansListTable() {
       dataIndex: 'amount',
       key: 'amount',
     },
-    {
-      title: 'Borrower',
-      key: 'borrower',
-      render: (_, record) => `${record.first_name} ${record.last_name}`,
-    },
-    {
-      title: 'Guarantor',
-      key: 'guarantor',
-      render: (_, record) => record.guarrantor_id ? `${record.guarrantor_first_name} ${record.guarrantor_last_name}` : 'N/A',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-    },
-    {
-      title: 'Paid Amount',
-      dataIndex: 'paid_amount',
-      key: 'paid_amount',
-    },
-    {
-      title: 'Loan Balance',
-      dataIndex: 'LoanBalance',
-      key: 'LoanBalance',
-    },
-    {
-      title: 'Transfer Fees',
-      dataIndex: 'TransferFees',
-      key: 'TransferFees',
-    },
-    {
-      title: 'Interest Amount',
-      dataIndex: 'InterestAmount',
-      key: 'InterestAmount',
-    },
-    {
-      title: 'Interest Paid',
-      dataIndex: 'InterestPaid',
-      key: 'InterestPaid',
-    },
-    {
-      title: 'Interest Balance',
-      dataIndex: 'InterestBalance',
-      key: 'InterestBalance',
-    },
-    {
-      title: 'Period',
-      dataIndex: 'period',
-      key: 'period',
-    },
-    {
-      title: 'Loan ID',
-      dataIndex: 'loan_id',
-      key: 'loan_id',
-    },
   ]
 
   return (

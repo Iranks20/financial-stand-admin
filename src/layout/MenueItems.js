@@ -188,6 +188,17 @@ function MenuItems({ toggleCollapsed }) {
         </NavLink>
       ),
     ),
+    getItem(
+      <NavLink onClick={toggleCollapsed} to={`${path}/users/welfarelist`}>
+        {('My Welfare')}
+      </NavLink>,
+      'My Welfare',
+      !topMenu && (
+        <NavLink className="menuItem-iocn" to={`${path}/users/welfarelist`}>
+          <UilBookOpen />
+        </NavLink>
+      ),
+    ),
     // getItem(
     //   <NavLink onClick={toggleCollapsed} to={`${path}/users/testimoniallist`}>
     //     {('Expenses')}

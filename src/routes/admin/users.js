@@ -1,5 +1,6 @@
 import React, { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import WelfareList from '../../container/users/welfares';
 
 const Users = lazy(() => import('../../container/users/Users'));
 const AddUser = lazy(() => import('../../container/users/AddUsers'));
@@ -32,6 +33,7 @@ function PagesRoute() {
       <Route path="sponsorslist" element={<SponsorsTable />} />
       <Route path="faqslist" element={<FaqsTable />} />
       <Route path="team" element={<Team />} />
+      <Route path="welfarelist" element={<WelfareList />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
