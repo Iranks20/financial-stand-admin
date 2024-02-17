@@ -47,7 +47,7 @@ function SignIn() {
       <Col xxl={6} xl={8} md={12} sm={18} xs={24}>
         <AuthFormWrap>
           <div className="ninjadash-authentication-top">
-          <Link style={{float: "left"}} to="http://financialstand.club">Back to home</Link>
+            <NavLink style={{float: "left"}} to="http://financialstand.club" target="_blank" rel="noopener noreferrer">Back to login</NavLink>
             <h2 className="ninjadash-authentication-top__title">Log In To Account</h2>
           </div>
           <div className="ninjadash-authentication-content">
