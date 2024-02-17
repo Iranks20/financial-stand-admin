@@ -97,6 +97,17 @@ function MenuItems({ toggleCollapsed }) {
       'group',
     ),
     getItem(
+      <NavLink to="http://financialstand.club" target="_blank" rel="noopener noreferrer">
+        {('Home')}
+      </NavLink>,
+      'home',
+      !topMenu && (
+        <NavLink className="menuItem-iocn" to="http://financialstand.club" target="_blank" rel="noopener noreferrer">
+          <UilBookOpen />
+        </NavLink>
+      ),
+    ),
+    getItem(
       <NavLink onClick={toggleCollapsed} to={`${path}/users/testimoniallist`}>
         {('Dashboard')}
       </NavLink>,
