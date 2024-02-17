@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Row, Col, Form, Input, Button, message } from 'antd';
 import { AuthFormWrap } from './style';
 import { Checkbox } from '../../../../components/checkbox/checkbox';
